@@ -31,6 +31,10 @@ const BottomRightHandle = (props) => (
       input1: {
           height:'100%',
           width: '100vw'
+      },
+      resize:{
+        border: 'solid 1px #ddd',
+        background: '#f0f0f0',
       }
   };
 
@@ -68,15 +72,11 @@ class MarkdownTest extends React.Component {
     }
 
     render() {
-        const style = {
-            border: 'solid 1px #ddd',
-            background: '#f0f0f0',
-          };
         return(
             <div>
                 <div dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(this.state.markdown)}}></div> 
                 <Resizable 
-                    style={style}
+                    style={this.props.classes.resize}
                     enable={{ top:false, right:false, bottom:true, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }}
                     handleComponent={{
                         bottom: BottomRightHandle,
