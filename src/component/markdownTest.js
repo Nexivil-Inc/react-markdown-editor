@@ -3,12 +3,16 @@ import MarkdownIt from 'markdown-it'
 import MarkdownItKatex from 'markdown-it-katex'
 import DOMPurify from 'dompurify';
 import TextField from '@material-ui/core/TextField';
-import Resizable from 're-resizable';
 import { withStyles } from '@material-ui/core/styles';
+import TextArea from './TextArea';
+import SimpleTable from './Table';
+import '../css/table.css';
+
+
 
 const SouthEastArrow = () => (
     <svg width='100px' height='10px' viewBox='0 0 100 10' xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="4.5" x2="20" y2="4.5" stroke="black" stroke-linecap="round" stroke-width="2" />
+        <line x1="0" y1="5" x2="20" y2="5" stroke="#A8ABAD" stroke-linecap="round" stroke-width="2" />
     </svg>
   )
 
@@ -18,7 +22,7 @@ const BottomRightHandle = (props) => (
         display:'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#ddd',
+        background: '#DFE2E5',
         height: '10px',
         width: '100%',
         padding: 0,
@@ -28,14 +32,16 @@ const BottomRightHandle = (props) => (
   )
 
   const styles = {
-      input1: {
-          height:'100%',
-          width: '100vw'
-      },
-      resize:{
+    input1: {
+        height: '100%',
+    },
+    resize:{
+        display: 'flex',
+        position: 'relative',
         border: 'solid 1px #ddd',
-        background: '#f0f0f0',
-      }
+        background: '#FFFFFF',
+        padding:10
+    }
   };
 
 
@@ -49,6 +55,7 @@ class MarkdownTest extends React.Component {
         
 
         this.md = MarkdownIt();
+        
         //this.mk = MarkdownItKatex();
         this.md.use(MarkdownItKatex);
         // double backslash is required for javascript strings, but not html input
@@ -67,32 +74,21 @@ class MarkdownTest extends React.Component {
         this.md.use(MarkdownItKatex);
         var result = this.md.render(event.target.value)
         //var result = this.md.render('$\\sqrt{3x-1}+(1+x)^2$')
-        console.log(result)
+        // console.log(result)
         this.setState({markdown: result})
     }
 
     render() {
         return(
-            <div>
-                <div dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(this.state.markdown)}}></div> 
-                <Resizable 
-                    style={this.props.classes.resize}
-                    enable={{ top:false, right:false, bottom:true, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }}
-                    handleComponent={{
-                        bottom: BottomRightHandle,
-                      }}>
-                    {/* <textarea style={{height:'calc(100% - 10px)',width:'100%'}}  onChange={this.handleChange}/> */}
-                    <TextField Component='textarea' multiline rows='4' label="Test" InputProps={{classes:{ input: this.props.classes.input1}}} onChange={this.handleChange} variant="outlined" /> 
-                </Resizable>
-                {/* <input style={{width:'400px' , height:'400px'}} onChange={this.handleChange}></input> */}
+            <>
+                <div dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(this.state.markdown)}} id="jss-insertion-point"></div> 
 
-            </div>
-            
-
-            
+                {/* <SimpleTable/> */}
+                <TextArea handleChange={this.handleChange}/>
+            </>
         )
     }
 }
 
-export default withStyles(styles)(MarkdownTest);
+export default MarkdownTest;
 
