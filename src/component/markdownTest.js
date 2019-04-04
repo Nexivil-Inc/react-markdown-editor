@@ -3,59 +3,27 @@ import MarkdownIt from 'markdown-it'
 import MarkdownItKatex from 'markdown-it-katex'
 import DOMPurify from 'dompurify';
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import TextArea from './TextArea';
 import SimpleTable from './Table';
+import Toolbar from './Toolbar';
 import '../css/table.css';
 
 
-
-const SouthEastArrow = () => (
-    <svg width='100px' height='10px' viewBox='0 0 100 10' xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="5" x2="20" y2="5" stroke="#A8ABAD" stroke-linecap="round" stroke-width="2" />
-    </svg>
-  )
-
-const BottomRightHandle = (props) => (
-    <div
-    style={{
-        display:'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#DFE2E5',
-        height: '10px',
-        width: '100%',
-        padding: 0,
-      }}>
-        <SouthEastArrow/>
-    </div>
-  )
-
-  const styles = {
-    input1: {
-        height: '100%',
+const styles = theme => ({
+    root: {
+        margin: 10,
+        paddingTop: 0,
+        paddingBottom: 4,
     },
-    resize:{
-        display: 'flex',
-        position: 'relative',
-        border: 'solid 1px #ddd',
-        background: '#FFFFFF',
-        padding:10
-    }
-  };
-
-
-
+});
 
 class MarkdownTest extends React.Component {
 
     constructor(props){
         super(props);
-
-        
-
         this.md = MarkdownIt();
-        
         //this.mk = MarkdownItKatex();
         this.md.use(MarkdownItKatex);
         // double backslash is required for javascript strings, but not html input
@@ -63,11 +31,6 @@ class MarkdownTest extends React.Component {
         this.result = result
         console.log(this.result)
         this.state={markdown: result}
-    }
-
-
-    componentDidMount() {
-       
     }
 
     handleChange = (event) => {
@@ -82,13 +45,16 @@ class MarkdownTest extends React.Component {
         return(
             <>
                 <div dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(this.state.markdown)}} id="jss-insertion-point"></div> 
+                <Paper className={this.props.classes.root}>
 
-                {/* <SimpleTable/> */}
-                <TextArea handleChange={this.handleChange}/>
+                    {/* <SimpleTable/> */}
+                    <Toolbar/>
+                    <TextArea handleChange={this.handleChange}/>
+                </Paper>
             </>
         )
     }
 }
 
-export default MarkdownTest;
+export default withStyles(styles)(MarkdownTest);
 
