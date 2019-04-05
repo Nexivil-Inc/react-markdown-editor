@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MarkdownIt from 'markdown-it'
 import MarkdownItKatex from 'markdown-it-katex'
 import DOMPurify from 'dompurify';
@@ -29,39 +29,93 @@ const BottomRightHandle = () => (
 
 const styles = {
     input1: {
-        height: '100%',
+      minHeight: '100px',
+      maxHeight: '800px',
+      height: '100%',
+    },
+    root: {
+      height: '100%',
     },
     resize:{
-        display: 'flex',
-        position: 'relative',
-        border: 'solid 1px #ddd',
-        background: '#FFFFFF',
-        padding:10
-    }
+      display: 'flex',
+      position: 'relative',
+      border: 'solid 1px #ddd',
+      background: '#FFFFFF',
+      padding:10,
+      width: '100%',
+      minHeight: '300px',
+      maxHeight: '800px',
+    },
   };
 
 
+class TextAreaWrapper extends React.PureComponent {
 
-function TextArea(props) {
-        return(
-            <div>
-                <Resizable 
-                    className={props.classes.resize}
-                    defaultSize={{
-                        width: '100%',
-                        height: 300,
-                      }}
-                    minHeight='300'
-                    maxHeight='800'
-                    enable={{ top:false, right:false, bottom:true, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }}
-                    handleComponent={{
-                        bottom: BottomRightHandle,
-                      }}>
-                    <TextField Component='textarea' multiline rows='4000' label="Test" InputProps={{classes:{ input: props.classes.input1}}} onChange={props.handleChange} variant="outlined" fullWidth='true' /> 
-                </Resizable>
-            </div>
-        )
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const {classes} = this.props;
+    return (
+      <Resizable 
+        className={classes.resize}
+        defaultSize={{
+          height: 300
+        }}
+        enable={{ top:false, right:false, bottom:true, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }}
+        handleComponent={{
+            bottom: BottomRightHandle,
+          }}>
+        <TextArea {...this.props}/>
+      </Resizable>
+    )
+  }
 }
 
-export default withStyles(styles)(TextArea);
+class TextArea extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state={
+      TempText: null,
+    };
+  }
+  componentWillMount() {
+    console.log(this.props.value);
+    this.state.TempText=this.props.value;
+  }
+  componentWillUpdate(prev1,prev2) {
+    return false;
+  }
+  componentWillUnmount() {
+    // console.log(this.TempText);
+    this.props.saveTempText(this.state.TempText);
+  }
+
+  onChangeHandler = (e) => {
+    // this.setState({TempText:e.target.value}); 
+    this.setState({TempText:e.target.value});
+    // console.log(this.TempText);
+  }
+
+  render() {
+    const {value, editorRef, classes} = this.props;
+    return (
+        <TextField 
+          Component='textarea'
+          InputProps={{classes:{ input: classes.input1, root: classes.root}}}
+          variant="outlined"
+          inputRef={editorRef} 
+          defaultValue={value}
+          onChange={this.onChangeHandler}
+          multiline
+          rows='1000'
+          fullWidth='true'
+          placeholder='Test'
+          autoFocus='true' /> 
+    )
+  }
+}
+
+export default withStyles(styles)(TextAreaWrapper);
 

@@ -2,6 +2,10 @@ import React from 'react';
 import { withStyles } from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import {getDefaultCommands} from '../commands';
+import ToolbarDropDown from './ToolbarComponent/ToolbarDropDown';
+import ToolbarButton from './ToolbarComponent/ToolbarButton';
+
 
 const styles = theme => ({
     toolbar: {
@@ -18,21 +22,54 @@ class Toolbar extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            value: 1,
+            value: 0,
+        }
+        this.commands = getDefaultCommands();
+    }
+
+
+    tabChangeHandler = (e,value) => {
+        if (value !==this.state.value) {
+            this.setState({value})
+            this.props.tabChangeHandler(value)
         }
     }
 
-    tabChangeHandler = (e,value) => {
-        this.setState({value})
-    }
-
     render() {
+        const {classes, onCommand, readOnly} = this.props;
         return (
             <div className={this.props.classes.toolbar}>
                 <Tabs value={this.state.value} onChange={this.tabChangeHandler} indicatorColor="primary" textColor="primary">
                     <Tab label='Edit'/>
                     <Tab label='Preview'/>
                 </Tabs>
+                {this.commands.map((commandGroup, i) => (
+                    <div key={i}>
+                    {commandGroup.commands.map((c,j) => {
+                        if (c.children) {
+                            return (
+                                <ToolbarDropDown
+                                    classes={classes}
+                                    key={j}
+                                    buttonProps={c.buttonProps}
+                                    name={c.name}
+                                    commands={c.children}
+                                    onCommand={(cmd) => onCommand(cmd)}
+                                    readOnly={readOnly}/>
+                            );
+                        }
+                        return (
+                            <ToolbarButton
+                                classes={classes}
+                                key={j}
+                                name={c.name}
+                                buttonProps={c.buttonProps}
+                                onClick={()=>onCommand(c)}
+                                readOnly={readOnly} />
+                        )
+                    })}
+                    </div>
+                ))}
             </div>
         )
     }

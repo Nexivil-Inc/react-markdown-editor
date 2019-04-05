@@ -1,7 +1,7 @@
-import { selectWord } from "../util/MarkdownUtil";
+import { selectWord } from "../utils/MarkdownUtils";
 
 export const imageCommand = {
-    name: "image",
+    name: "Image",
     buttonProps: { "aria-label": "Add image" },
     execute: (state0, api) => {
         // Adjust the selection to encompass the whole word if the caret is inside one
@@ -16,6 +16,4 @@ export const imageCommand = {
         });
     },
     keyCommand: "image",
-};F
-
-F
+};

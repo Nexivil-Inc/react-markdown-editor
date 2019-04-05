@@ -2,12 +2,12 @@ import insertText from 'insert-text-at-cursor';
 
 export const getStateFromTextArea = textArea => {
     return {
-        Selection: {
+        selection: {
             start: textArea.selectionStart,
             end: textArea.selectionEnd,
         },
         text: textArea.value,
-        selectionText: textArea.value.slice(textArea.selectionStart,textArea.selectionEnd)
+        selectedText: textArea.value.slice(textArea.selectionStart,textArea.selectionEnd)
     }
 }
 
@@ -16,7 +16,7 @@ export class TextAreaTextApi {
         this.textArea=textArea
     }
     replaceSelection(text) {
-        insertText(this.text, text);
+        insertText(this.textArea, text);
         return getStateFromTextArea(this.textArea)
     }
     setSelectionRange(selection) {
@@ -34,6 +34,6 @@ export class TextAreaCommandExcuteHelper {
     }
 
     excuteCommand(command) {
-        command.excute(getStateFromTextArea(this.textArea), this.TextApi)
+        command.execute(getStateFromTextArea(this.textArea), this.TextApi)
     }
 }

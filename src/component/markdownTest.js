@@ -1,15 +1,11 @@
 import React from 'react';
-import MarkdownIt from 'markdown-it'
-import MarkdownItKatex from 'markdown-it-katex'
-import DOMPurify from 'dompurify';
-import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import TextArea from './TextArea';
-import SimpleTable from './Table';
+import PreviewArea from './PreviewArea';
 import Toolbar from './Toolbar';
-import '../css/table.css';
-
+// import '../css/table.css';
+import {TextAreaCommandExcuteHelper} from '../utils/commandExcuteHelper'
 
 const styles = theme => ({
     root: {
@@ -19,37 +15,52 @@ const styles = theme => ({
     },
 });
 
-class MarkdownTest extends React.Component {
+class MarkdownTest extends React.PureComponent {
 
     constructor(props){
         super(props);
-        this.md = MarkdownIt();
-        //this.mk = MarkdownItKatex();
-        this.md.use(MarkdownItKatex);
-        // double backslash is required for javascript strings, but not html input
-        var result = this.md.render('# Math Rulez! $\\text{\(\frac a b\)}$')
-        this.result = result
-        console.log(this.result)
-        this.state={markdown: result}
+
+        this.state={
+            tabIndex: 0,
+            TempText: null,
+            readOnly: false,
+        }
     }
 
-    handleChange = (event) => {
-        this.md.use(MarkdownItKatex);
-        var result = this.md.render(event.target.value)
-        //var result = this.md.render('$\\sqrt{3x-1}+(1+x)^2$')
-        // console.log(result)
-        this.setState({markdown: result})
+    saveTempText = (text) => {
+        this.setState({TempText: text});
+    }
+
+    setTextAreaRef = (element) => {
+        this.textAreaRef = element;
+        this.commandContainer = new TextAreaCommandExcuteHelper(this.textAreaRef);
+    };
+
+    commandHandler = (command) => {
+        this.commandContainer.excuteCommand(command)
+    }
+
+    tabChangeHandler = (value) => {
+        this.setState({
+            tabIndex:value,
+            readOnly: !this.state.readOnly,
+        });
     }
 
     render() {
+        const {tabIndex, readOnly} = this.state;
         return(
             <>
-                <div dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(this.state.markdown)}} id="jss-insertion-point"></div> 
                 <Paper className={this.props.classes.root}>
-
                     {/* <SimpleTable/> */}
-                    <Toolbar/>
-                    <TextArea handleChange={this.handleChange}/>
+                    <Toolbar tabChangeHandler={this.tabChangeHandler} onCommand={this.commandHandler} readOnly={readOnly} />
+                    {tabIndex===0? 
+                        <TextArea
+                            editorRef={this.setTextAreaRef}
+                            saveTempText={this.saveTempText}
+                            value={this.state.TempText} />
+                        :
+                        <PreviewArea text={this.state.TempText}/>}
                 </Paper>
             </>
         )

@@ -1,4 +1,5 @@
-import { selectWord } from "../util/MarkdownUtil";
+import React from 'react';
+import { selectWord } from "../utils/MarkdownUtils";
 
 function setHeader(state0, api, prefix) {
     // Adjust the selection to encompass the whole word if the caret is inside one
@@ -14,27 +15,23 @@ function setHeader(state0, api, prefix) {
 }
 
 export const headerCommand = {
-    name: "format-title",
+    name: "FormatSize",
     buttonProps: { "aria-label": "Add header" },
     children: [
         {
-            name: "header-1",
-            icon: () => <p className="header-1">Header 1</p>,
+            name: "FormatHeader1",
             execute: (state, api) => setHeader(state, api, "# "),
         },
         {
-            name: "header-2",
-            icon: () => <p className="header-2">Header 2</p>,
+            name: "FormatHeader2",
             execute: (state, api) => setHeader(state, api, "## "),
         },
         {
-            name: "header-3",
-            icon: () => <p className="header-3">Header 3</p>,
+            name: "FormatHeader3",
             execute: (state, api) => setHeader(state, api, "### "),
         },
         {
-            name: "header-4",
-            icon: () => <p className="header-4">Header 4</p>,
+            name: "FormatHeader4",
             execute: (state, api) => setHeader(state, api, "#### "),
         },
     ],

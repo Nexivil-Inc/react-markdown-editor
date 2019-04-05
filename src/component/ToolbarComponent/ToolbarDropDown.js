@@ -1,11 +1,12 @@
 import React from 'react';
-import { withStyles, Fade, Paper } from '@material-ui/core';
+import { withStyles, Paper } from '@material-ui/core';
 import Popper from '@material-ui/core/Popper';
 import Button from '@material-ui/core/Button';
 import ToolbarButton from './ToolbarButton';
 import Fade from '@material-ui/core/Fade';
+import Icon from '@material-ui/core/Icon';
 
-class ToolbarDropDown extends React.Component {
+export class ToolbarDropDown extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,9 +33,10 @@ class ToolbarDropDown extends React.Component {
         const { classes, name, buttonProps, readOnly, commands } = this.props
         const { IsOpen, anchorEl } = this.state
         const id = IsOpen? name:null
-
+        const TestSvgIcon2 = require(`mdi-material-ui/${name}`).default;
         const items = commands.map((command, i) => (
             <ToolbarButton
+                classes={classes}
                 key={`${name}-Items${i}`}
                 name={command.name}
                 buttonProps={buttonProps}
@@ -44,12 +46,12 @@ class ToolbarDropDown extends React.Component {
 
         return (
             <>
-                <Button aria-describedby={id} variant='contained' color='default' className={classes.Button} disabled={readOnly} onClick={} {...buttonProps}>
-                    <Icon>{name}</Icon>
+                <Button aria-describedby={id} color='default' className={classes.Button} disabled={readOnly} onClick={this.clickHandler} {...buttonProps}>
+                    <TestSvgIcon2 />
                 </Button>
                 <Popper id={id} open={IsOpen} anchorEl={anchorEl} transition>
-                    {({transitionProps}) => (
-                        <Fade {...transitionProps} timeout={350}>
+                    {({ TransitionProps }) => (
+                        <Fade {...TransitionProps} timeout={350}>
                             <Paper>
                                 {items}
                             </Paper>
@@ -60,3 +62,5 @@ class ToolbarDropDown extends React.Component {
         )
     }
 }
+
+export default ToolbarDropDown;

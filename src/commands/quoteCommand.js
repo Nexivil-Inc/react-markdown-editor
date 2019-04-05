@@ -1,7 +1,7 @@
-import { getBreaksNeededForEmptyLineAfter, getBreaksNeededForEmptyLineBefore, selectWord } from "../util/MarkdownUtil";
+import { getBreaksNeededForEmptyLineAfter, getBreaksNeededForEmptyLineBefore, selectWord } from "../utils/MarkdownUtils";
 
 export const quoteCommand = {
-    name: "format-quote-close",
+    name: "FormatQuoteClose",
     buttonProps: { "aria-label": "Add bold text" },
     execute: (state0, api) => {
         // Adjust the selection to encompass the whole word if the caret is inside one

@@ -10,6 +10,7 @@
     "katex": "^0.10.1",
     "markdown-it": "^8.4.2",
     "markdown-it-katex": "^2.0.3",
+    "mdi-material-ui": "^5.10.0",
     "node-sass": "^4.11.0",
     "re-resizable": "^4.11.0",
     "react": "^16.8.6",

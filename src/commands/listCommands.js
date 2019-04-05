@@ -1,4 +1,4 @@
-import { getBreaksNeededForEmptyLineAfter, getBreaksNeededForEmptyLineBefore, selectWord } from "../util/MarkdownUtil";
+import { getBreaksNeededForEmptyLineAfter, getBreaksNeededForEmptyLineBefore, selectWord } from "../utils/MarkdownUtils";
 
 
 
@@ -53,7 +53,7 @@ export const makeList = (state0, api, insertBefore) => {
 }
 
 export const unorderedListCommand = {
-    name: "format-list-bulleted",
+    name: "FormatListBulleted",
     buttonProps: { "aria-label": "Add unordered list" },
     execute: (state0, api) => {
         makeList(state0, api, "- ")
@@ -62,16 +62,7 @@ export const unorderedListCommand = {
 };
 
 export const orderedListCommand = {
-    name: "format-list-numbered",
-    buttonProps: { "aria-label": "Add ordered list" },
-    execute: (state0, api) => {
-        makeList(state0, api, (item, index) => `${index + 1}. `)
-    },
-    keyCommand: "code",
-};
-
-export const checkedListCommand = {
-    name: "format-list-checkbox",
+    name: "FormatListNumbered",
     buttonProps: { "aria-label": "Add ordered list" },
     execute: (state0, api) => {
         makeList(state0, api, (item, index) => `${index + 1}. `)
