@@ -5,13 +5,15 @@ import MarkdownItAnchor from 'markdown-it-anchor';
 import MarkdownItToc from '@liradb2000/markdown-it-toc-done-right';
 import DOMPurify from 'dompurify';
 import uslug from 'uslug';
+import MarkdownItMermaid from '@liradb2000/markdown-it-mermaid';
 import '../css/MarkDown.css';
 
 const uslugify = s => uslug(s);
 
 const renderMarkdown = (text) => {
     var md = MarkdownIt({
-        html: true,
+        html: false,
+        xhtml: true,
         linkify: true,
         typographer: true
     });
@@ -26,7 +28,7 @@ const renderMarkdown = (text) => {
     }).use(MarkdownItToc, {
         level: [1,2],
         slugify: uslugify,
-    });
+    }).use(MarkdownItMermaid);
     return md.render(text? text: "")
 }
 
