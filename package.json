@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@liradb2000/markdown-it-katex": "^2.0.4",
     "@liradb2000/markdown-it-mermaid": "^0.3.0",
     "@liradb2000/markdown-it-toc-done-right": "^3.0.3",
     "@material-ui/core": "^3.9.3",
@@ -12,8 +13,8 @@
     "katex": "^0.10.1",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.0.2",
-    "markdown-it-katex": "^2.0.3",
     "mdi-material-ui": "^5.10.0",
+    "mermaid": "^8.0.0",
     "node-sass": "^4.11.0",
     "re-resizable": "^4.11.0",
     "react": "^16.8.6",

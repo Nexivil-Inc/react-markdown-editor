@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import MarkdownIt from 'markdown-it'
-import MarkdownItKatex from 'markdown-it-katex'
 import DOMPurify from 'dompurify';
 import TextField from '@material-ui/core/TextField';
 import Resizable from 're-resizable';
