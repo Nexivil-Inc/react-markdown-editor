@@ -7,6 +7,7 @@ import uslug from 'uslug';
 import MarkdownItMermaid from '@liradb2000/markdown-it-mermaid';
 import '../css/MarkDown.css';
 import DOMPurify from 'dompurify';
+import MarkdownItFootnote from 'markdown-it-footnote'
 
 const uslugify = s => uslug(s);
 
@@ -29,13 +30,13 @@ const renderMarkdown = (text) => {
     }).use(MarkdownItToc, {
         level: [1,2],
         slugify: uslugify,
-    }).use(MarkdownItMermaid);
+    }).use(MarkdownItMermaid).use(MarkdownItFootnote);
     return md.render(text? (text): "")
 }
 
 const PreviewArea = props => {
     return (
-        <div className="markdown-body" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(renderMarkdown(props.text),{USE_PROFILES: {svg: true, svgFilters: true}, ADD_ATTR: ['style']})}}></div> 
+        <div className="markdown-body" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(renderMarkdown(props.text))}}></div> 
         // <div className="markdown-body" dangerouslySetInnerHTML={{__html:renderMarkdown(props.text)}}></div> 
     )
 }
