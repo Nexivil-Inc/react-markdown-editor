@@ -35,7 +35,7 @@ const renderMarkdown = (text) => {
 
 const PreviewArea = props => {
     return (
-        <div className="markdown-body" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(renderMarkdown(props.text),{USE_PROFILES: {svg: true, svgFilters: true}, ADD_ATTR: ['style']})}}></div> 
+        <div className="markdown-body" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(renderMarkdown(props.text))}}></div> 
         // <div className="markdown-body" dangerouslySetInnerHTML={{__html:renderMarkdown(props.text)}}></div> 
     )
 }

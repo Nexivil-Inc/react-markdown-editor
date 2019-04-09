@@ -75,13 +75,10 @@ class TextArea extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state={
-      TempText: null,
+      TempText: props.value,
     };
   }
-  componentWillMount() {
-    console.log(this.props.value);
-    this.state.TempText=this.props.value;
-  }
+
   componentWillUpdate(prev1,prev2) {
     return false;
   }
