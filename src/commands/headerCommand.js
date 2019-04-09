@@ -1,4 +1,3 @@
-import React from 'react';
 import { selectWord } from "../utils/MarkdownUtils";
 
 function setHeader(state0, api, prefix) {

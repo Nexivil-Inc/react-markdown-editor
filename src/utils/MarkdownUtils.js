@@ -17,9 +17,9 @@ export function getSurroundingWord (text, position) {
   }
 
   // iterate to the right
-  for (var i = position; i < text.length; i++) {
-    if (isWordDelimiter(text[i])) {
-      end = i;
+  for (var j = position; j < text.length; j++) {
+    if (isWordDelimiter(text[j])) {
+      end = j;
       break;
     }
   }

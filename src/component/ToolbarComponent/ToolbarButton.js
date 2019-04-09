@@ -1,8 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
-import SvgIcon from '@material-ui/core/SvgIcon';
 import Button from '@material-ui/core/Button';
-import TestSvgIcon from 'mdi-material-ui/FormatBold';
 
 // const styles = theme => ({
 //     button: {

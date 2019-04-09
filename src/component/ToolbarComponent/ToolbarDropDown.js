@@ -1,10 +1,9 @@
 import React from 'react';
-import { withStyles, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import Popper from '@material-ui/core/Popper';
 import Button from '@material-ui/core/Button';
 import ToolbarButton from './ToolbarButton';
 import Fade from '@material-ui/core/Fade';
-import Icon from '@material-ui/core/Icon';
 
 export class ToolbarDropDown extends React.PureComponent {
     constructor(props) {

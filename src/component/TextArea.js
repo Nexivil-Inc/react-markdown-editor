@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import DOMPurify from 'dompurify';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Resizable from 're-resizable';
 import { withStyles } from '@material-ui/core/styles';
 
 const SouthEastArrow = () => (
     <svg width='100px' height='10px' viewBox='0 0 100 10' xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="5" x2="20" y2="5" stroke="#A8ABAD" stroke-linecap="round" stroke-width="2" />
+        <line x1="0" y1="5" x2="20" y2="5" stroke="#A8ABAD" strokeLinecap="round" strokeWidth="2" />
     </svg>
   )
 
@@ -48,11 +47,6 @@ const styles = {
 
 
 class TextAreaWrapper extends React.PureComponent {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {classes} = this.props;
     return (
@@ -97,7 +91,6 @@ class TextArea extends React.PureComponent {
     const {value, editorRef, classes} = this.props;
     return (
         <TextField 
-          Component='textarea'
           InputProps={{classes:{ input: classes.input1, root: classes.root}}}
           variant="outlined"
           inputRef={editorRef} 
@@ -105,9 +98,9 @@ class TextArea extends React.PureComponent {
           onChange={this.onChangeHandler}
           multiline
           rows='1000'
-          fullWidth='true'
+          fullWidth={true}
           placeholder='Test'
-          autoFocus='true' /> 
+          autoFocus={true} /> 
     )
   }
 }
