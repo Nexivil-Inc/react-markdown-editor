@@ -7,6 +7,7 @@ import uslug from 'uslug';
 import MarkdownItMermaid from '@liradb2000/markdown-it-mermaid';
 import '../css/MarkDown.css';
 import DOMPurify from 'dompurify';
+import MarkdownItFootnote from 'markdown-it-footnote'
 
 const uslugify = s => uslug(s);
 
@@ -29,7 +30,7 @@ const renderMarkdown = (text) => {
     }).use(MarkdownItToc, {
         level: [1,2],
         slugify: uslugify,
-    }).use(MarkdownItMermaid);
+    }).use(MarkdownItMermaid).use(MarkdownItFootnote);
     return md.render(text? (text): "")
 }
 
