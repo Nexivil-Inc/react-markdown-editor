@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MarkdownIt from 'markdown-it';
 import MarkdownItKatex from '@liradb2000/markdown-it-katex';
 import MarkdownItAnchor from 'markdown-it-anchor';
@@ -16,6 +16,8 @@ import MarkdownItFootnote from 'markdown-it-footnote';
 const uslugify = s => uslug(s);
 
 const renderMarkdown = (text) => {
+
+    
     var md = MarkdownIt({
         html: false,
         linkify: true,
@@ -37,13 +39,17 @@ const renderMarkdown = (text) => {
     }).use(MarkdownItMermaid).use(MarkdownItFootnote).use(MarkdownItApexCharts)
     //.use(MarkdownItApex).use(MarkdownItMarkvis);
     //return md.render(text? (text): "", {d3})
-    var timeoutID = window.setTimeout(()=>{
-        ApexRender();
-    },3000);
+   
     return md.render(text? (text): "")
 }
 
 const PreviewArea = props => {
+
+    useEffect(()=>{
+         ApexRender();
+    })
+
+
     return (
         <div className="markdown-body" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(renderMarkdown(props.text))}}></div> 
         // <div className="markdown-body" dangerouslySetInnerHTML={{__html:renderMarkdown(props.text)}}></div> 
