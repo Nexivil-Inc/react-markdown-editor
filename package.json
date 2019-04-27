@@ -15,12 +15,11 @@
     "markdown-it-anchor": "^5.0.2",
     "markdown-it-footnote": "^3.0.1",
     "mdi-material-ui": "^5.10.0",
-    "node-sass": "^4.11.0",
     "re-resizable": "^4.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-jss": "^8.6.1",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^3.0.0",
     "uslug": "^1.0.4"
   },
   "scripts": {
