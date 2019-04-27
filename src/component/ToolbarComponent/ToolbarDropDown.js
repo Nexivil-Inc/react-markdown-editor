@@ -45,7 +45,7 @@ export class ToolbarDropDown extends React.PureComponent {
 
         return (
             <>
-                <Button aria-describedby={id} color='default' className={classes.Button} disabled={readOnly} onClick={this.clickHandler} {...buttonProps}>
+                <Button aria-describedby={id} color='default' className={classes.button} disabled={readOnly} onClick={this.clickHandler} {...buttonProps}>
                     <TestSvgIcon2 />
                 </Button>
                 <Popper id={id} open={IsOpen} anchorEl={anchorEl} transition>

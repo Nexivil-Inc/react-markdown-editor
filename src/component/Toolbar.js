@@ -12,11 +12,23 @@ const styles = theme => ({
         width: '100%',
         minHeight: 10,
         background: '#DFE2E5',
+        display: 'flex',
+        flexWrap: 'wrap',
+        [theme.breakpoints.down('xs')]: {
+            position: 'fixed',
+            bottom: 0,
+            zIndex: 1001,
+            left: 0,
+        },
     },
     button: {
-        margin: theme.spacing.unit,
+        /* margin: theme.spacing.unit, */
+        marginTop: theme.spacing.unit,
         minWidth: '10px',
     },
+    toolGroup: {
+        margin: '0px 10px 0px 0px',
+    }
 });
 class Toolbar extends React.Component {
     constructor(props) {
@@ -44,7 +56,7 @@ class Toolbar extends React.Component {
                     <Tab label='Preview'/>
                 </Tabs>
                 {this.commands.map((commandGroup, i) => (
-                    <div key={i}>
+                    <div key={i} className={classes.toolGroup} >
                     {commandGroup.commands.map((c,j) => {
                         if (c.children) {
                             return (
