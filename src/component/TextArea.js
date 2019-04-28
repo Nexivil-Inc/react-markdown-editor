@@ -40,8 +40,8 @@ const styles = {
       background: '#FFFFFF',
       padding:10,
       width: '100%',
-      minHeight: '300px',
-      maxHeight: '80vh',
+      minHeight: '60px',
+      maxHeight: 'calc(100vh - 68px)',
     },
   };
 
@@ -54,7 +54,6 @@ class TextAreaWrapper extends React.PureComponent {
         className={classes.resize}
         defaultSize={{
           height: 300,
-          maxHeight: '80vh'
         }}
         enable={{ top:false, right:false, bottom:true, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }}
         handleComponent={{
