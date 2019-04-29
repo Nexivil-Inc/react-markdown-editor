@@ -15,7 +15,7 @@ export function ToolbarButton(props) {
     return (
         <Button color='default' className={classes.button} disabled={readOnly} onClick={onClick} {...buttonProps}>
             {/* <SvgIcon><path d={TestSvgIcon}/></SvgIcon> */}
-            <TestSvgIcon2 />
+            <TestSvgIcon2 fontSize='inherit'/>
         </Button>
     );
 }
