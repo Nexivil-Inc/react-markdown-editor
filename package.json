@@ -1,7 +1,12 @@
 {
-  "name": "wiki_component",
+  "name": "react-markdown-editor",
   "version": "0.1.0",
+  "description": "react markdown editor component which is made of markdown-it and many other plugins",
+  "main":"src/App.js",
   "private": true,
+  "license": "MIT",
+  "repository": "git@github.com:Nexivil-Inc/react-markdown-editor.git",
+  "author": "Nexivil <account@nexivil.com>",
   "dependencies": {
     "@liradb2000/markdown-it-katex": "^2.0.4",
     "@liradb2000/markdown-it-mermaid": "^0.3.2",
@@ -31,6 +36,20 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "keywords": [
+    "markdown-it-plugin",
+    "markdown-it",
+    "markdown",
+    "apexcharts",
+    "charts",
+    "bar",
+    "apex",
+    "apexchart",
+    "mermaid",
+    "react",
+    "editor",
+    "chart"
+  ],
   "eslintConfig": {
     "extends": "react-app"
   },
