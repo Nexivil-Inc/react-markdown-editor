@@ -1,9 +1,9 @@
 {
-  "name": "react-markdown-editor",
-  "version": "0.1.0",
+  "name": "react-markdown-editor-nexivil",
+  "version": "0.1.1",
   "description": "react markdown editor component which is made of markdown-it and many other plugins",
   "main":"src/App.js",
-  "private": true,
+  "private": false,
   "license": "MIT",
   "repository": "git@github.com:Nexivil-Inc/react-markdown-editor.git",
   "author": "Nexivil <account@nexivil.com>",
