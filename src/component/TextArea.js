@@ -24,43 +24,29 @@ const BottomRightHandle = () => (
     </div>
   )
 
-const styles = {
+const styles = theme => ({
     input1: {
       minHeight: '100px',
-      maxHeight: '800px',
-      height: '100%',
+      maxHeight: '100%',
+      //height: '100%',
+      [theme.breakpoints.down('xs')]: {
+        maxHeight: '100%'
+    },
     },
     root: {
-      height: '100%',
+      height: '100vh',
     },
-    resize:{
-      display: 'flex',
-      position: 'relative',
-      border: 'solid 1px #ddd',
-      background: '#FFFFFF',
-      padding:10,
-      width: '100%',
-      minHeight: '60px',
-      maxHeight: 'calc(100vh - 68px)',
-    },
-  };
+    
+  });
 
 
 class TextAreaWrapper extends React.PureComponent {
   render() {
     const {classes} = this.props;
     return (
-      <Resizable 
-        className={classes.resize}
-        defaultSize={{
-          height: 300,
-        }}
-        enable={{ top:false, right:false, bottom:true, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }}
-        handleComponent={{
-            bottom: BottomRightHandle,
-          }}>
+      
         <TextArea {...this.props}/>
-      </Resizable>
+      
     )
   }
 }
@@ -97,7 +83,7 @@ class TextArea extends React.PureComponent {
           defaultValue={value}
           onChange={this.onChangeHandler}
           multiline
-          rows='1000'
+          rows='100'
           fullWidth={true}
           placeholder='Test'
           autoFocus={true} /> 
