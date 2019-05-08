@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Resizable from 're-resizable';
+
 import { withStyles } from '@material-ui/core/styles';
 
 const SouthEastArrow = () => (
